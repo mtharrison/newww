@@ -45,8 +45,12 @@ package.show = function(request, reply) {
       return Download.getAll(package.name)
     })
     .catch(function(err){
-      // tolerate timed-out downloads API calls
-      if (err.code === 'ETIMEDOUT') return null;
+      if (err.code === 'ETIMEDOUT') {
+        request.logger.error('timed out fetching downloads counts for: ' + name);
+      } else if (err.statusCode === 404) {
+        request.logger.error('downloads counts not found for: ' + name);
+      }
+      return null;
     })
     .then(function(downloads) {
       package.downloads = downloads
