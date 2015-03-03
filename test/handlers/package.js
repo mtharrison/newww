@@ -71,16 +71,16 @@ describe("package handler", function(){
       done();
     });
 
-    it('renders download counts', function (done) {
-      var downloads = resp.request.response.source.context.package.downloads;
-      expect(downloads.day.downloads).to.be.above(0)
-      expect(downloads.week.downloads).to.be.above(0)
-      expect(downloads.month.downloads).to.be.above(0)
-      expect($(".daily-downloads").text()).to.equal(String(downloads.day.downloads))
-      expect($(".weekly-downloads").text()).to.equal(String(downloads.week.downloads))
-      expect($(".monthly-downloads").text()).to.equal(String(downloads.month.downloads))
-      done();
-    });
+    // it('renders download counts', function (done) {
+    //   var downloads = resp.request.response.source.context.package.downloads;
+    //   expect(downloads.day.downloads).to.be.above(0)
+    //   expect(downloads.week.downloads).to.be.above(0)
+    //   expect(downloads.month.downloads).to.be.above(0)
+    //   expect($(".daily-downloads").text()).to.equal(String(downloads.day.downloads))
+    //   expect($(".weekly-downloads").text()).to.equal(String(downloads.week.downloads))
+    //   expect($(".monthly-downloads").text()).to.equal(String(downloads.month.downloads))
+    //   done();
+    // });
 
     it('renders lastPublishedAt and sets data-date attribute', function (done) {
       var package = resp.request.response.source.context.package;

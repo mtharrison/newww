@@ -28,20 +28,20 @@ section
 
 .content-column
   float left
-  width minColumnWidth - sidebarMaxWidth - 100px
+  width 65%
   margin-bottom 90px
 
   @media only screen and (max-width: minColumnWidth)
     float none
-    max-width 100%
+    width 100%
     margin-bottom 40px
 
 .sidebar
   float right
-  margin-top 40px
-  max-width sidebarMaxWidth
+  margin-top 0px
+  width 30%
   @media only screen and (max-width: minColumnWidth)
-    max-width 100%
+    width 100%
     float none
     clear both
     overflow hidden
@@ -364,7 +364,7 @@ img.roomy-and-flexible
 
 .npm-install
   position relative
-  margin-bottom 20px
+  margin 20px 0
   &:before
     position absolute
     top 0

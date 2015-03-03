@@ -1,4 +1,4 @@
-var request = require('request');
+var http = require('nets')
 var Promise = require('bluebird');
 var _ = require('lodash');
 var fmt = require('util').format;
@@ -59,9 +59,18 @@ Download.prototype.getSome = function(period, packageName) {
   }
 
   return new Promise(function(resolve, reject) {
-    var opts = {url: url, json: true, timeout: _this.timeout, headers: {bearer: _this.bearer}};
+    var opts = {
+      method: "get",
+      url: url,
+      json: true,
+      timeout: _this.timeout,
+    };
 
-    request.get(opts, function(err, resp, body){
+    if (_this.bearer) {
+      opts.headers = {bearer: _this.bearer}
+    }
+
+    http(opts, function(err, resp, body){
       if (err) {
         return reject(err);
       }

@@ -11,7 +11,7 @@
     {{> form_security ..}}
   </form>
 
-  <div id="readme" class="markdown">
+  <div id="readme" class="markdown" data-package="{{name}}">
     {{#if readme}}
       {{{readme}}}
     {{else}}
@@ -95,22 +95,9 @@
   {{/if}}
 
   <h3>Stats</h3>
-  <ul class="box">
+  <ul class="box stats">
 
-    {{#if downloads}}
-      <li>
-        <strong class="pretty-number daily-downloads">{{downloads.day.downloads}}</strong>
-        {{pluralize downloads.day.downloads "downloads"}} in the last day
-      </li>
-      <li>
-        <strong class="pretty-number weekly-downloads">{{downloads.week.downloads}}</strong>
-        {{pluralize downloads.week.downloads "downloads"}} in the last week
-      </li>
-      <li>
-        <strong class="pretty-number monthly-downloads">{{downloads.month.downloads}}</strong>
-        {{pluralize downloads.month.downloads "downloads"}} in the last month
-      </li>
-    {{/if}}
+    <!-- downloads will be ajaxed into this spot -->
 
     {{#if bugs.url}}
       <li id="issues" {{#if ghapi}}data-ghapi="{{ghapi}}"{{/if}}>
