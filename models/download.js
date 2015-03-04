@@ -1,15 +1,14 @@
 var http = require('nets')
-var Promise = require('bluebird');
-var _ = require('lodash');
+var Promise = require('promise');
 var fmt = require('util').format;
 var URL = require('url');
 
 var Download = module.exports = function (opts) {
-  _.extend(this, {
-    host: process.env.DOWNLOADS_API || "https://downloads-api-example.com",
-    timeout: 2000,
-  }, opts);
-  return this;
+  this.host = opts.host
+    || process.env.DOWNLOADS_API
+    || "https://downloads-api-example.com"
+  this.timeout = opts.timeout || 2000
+  return this
 };
 
 Download.new = function(request) {

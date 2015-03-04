@@ -25,21 +25,6 @@ afterEach(function (done) {
 
 describe("Download", function(){
 
-  describe("initialization", function() {
-    it("defaults to process.env.DOWNLOADS_API as host", function(done) {
-      var DOWNLOADS_API_OLD = process.env.DOWNLOADS_API;
-      process.env.DOWNLOADS_API = "https://envy-dl.com/";
-      expect(new (require("../../models/download"))().host).to.equal('https://envy-dl.com/');
-      process.env.DOWNLOADS_API = DOWNLOADS_API_OLD;
-      done();
-    });
-
-    it("accepts a custom host", function(done) {
-      expect(Download.host).to.equal('https://fake-download.com');
-      done();
-    });
-  });
-
   describe("getDaily()", function() {
 
     describe("when package is specified", function() {
