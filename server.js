@@ -28,6 +28,12 @@ var server = new Hapi.Server(config.server);
 server.connection(config.connection);
 server.views(config.views);
 
+server.cacheThing = (new require("./lib/cache"))({
+  redis: process.env.REDIS_URL,
+  ttl: 300,
+  prefix: "cache:"
+})
+
 // configure couch
 var couchDB = require('./adapters/couchDB');
 couchDB.init(config.couch);
