@@ -13,8 +13,14 @@ var Download = module.exports = function (opts) {
 };
 
 Download.new = function(request) {
-  var bearer = request.auth.credentials && request.auth.credentials.name;
-  return new Download({bearer: bearer});
+  var opts = {}
+  if (request.auth.credentials) {
+    opts.bearer = request.auth.credentials.name
+  }
+  if (request.server.cacheThing) {
+    opts.cache = request.server.cacheThing
+  }
+  return new Download(opts)
 };
 
 Download.prototype.getDaily = function(packageName) {
