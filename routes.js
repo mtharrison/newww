@@ -2,7 +2,8 @@ var config = require('./config'),
     ops = require('./facets/ops'),
     fmt = require('util').format,
     validatePackageName = require('validate-npm-package-name'),
-    Hoek = require("hoek")
+    Hoek = require("hoek"),
+    Joi = require('joi')
 
 var enterpriseConfig = {
   plugins: {
@@ -121,6 +122,26 @@ var unauthenticatedRoutes = [
         crumb: {
           source: 'payload',
           restful: true
+        }
+      },
+      validate: {
+        payload: {
+          id: Joi.string().token(),
+          livemode: Joi.string(),
+          created: Joi.string(),
+          used: Joi.string(),
+          object: Joi.string(),
+          type: Joi.string(),
+          card: Joi.object(),
+          email: Joi.string().regex(/^.+@.+\..+$/), // email default accepts "boom@boom", which is kinda no bueno atm
+          verification_allowed: Joi.string(),
+          amount: Joi.number()
+        },
+        failAction: function(request, reply, source, error) {
+          request.logger.error('validation error');
+          request.logger.error(error.data);
+          reply('validation error').code(403);
+          return;
         }
       }
     }

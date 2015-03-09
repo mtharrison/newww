@@ -9,10 +9,15 @@ exports.register = function(server, options, next) {
 
   var metrics = require('./metrics')();
 
+  server.ext('onRequest', function(request, reply) {
+
+    request.logger = bole(request.id);
+    return reply.continue();
+  });
+
   server.ext('onPreHandler', function(request, reply) {
 
     request.metrics = metrics;
-    request.logger = bole(request.id);
     request.timing = {
       start: Date.now(),
     };
